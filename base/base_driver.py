@@ -1,7 +1,7 @@
 from appium import webdriver
 
 
-def init_drvier():
+def init_drvier(no_reset=True):
     # 创建一个字典，包装相应的启动参数
     desired_caps = dict()
     # 需要连接的手机的平台（不限制大小写）
@@ -14,8 +14,9 @@ def init_drvier():
     desired_caps['appPackage'] = 'com.yunmall.lc'
     # 需要启动的程序的界面名
     desired_caps['appActivity'] = 'com.yunmall.ymctoc.ui.activity.MainActivity'
-    # 输入中文 需添加代码
-    desired_caps['unicodeKeyboard'] = True
-    desired_caps['reseKeyboard'] = True
+    # 使用uiautomator2框架,找toast
+    desired_caps['automationName'] = 'Uiautomator2'
+    # 是否重置应用 True:不重置 False:重置
+    desired_caps['noReset'] = no_reset
     # 连接appium服务器
     return webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
